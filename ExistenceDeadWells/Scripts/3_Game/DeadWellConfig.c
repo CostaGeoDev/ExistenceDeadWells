@@ -15,7 +15,7 @@ class DeadWellConfig
     int toolDamage = 100; // The amount of damage a tool will take when trying to fix a well (100 = destroyed)
     int timeUntilBrokenAgain = 7200; // The amount of time in seconds until a well breaks again (7200 = default 2 hours)
     bool enableWellTransferCholera = true; // If true, wells can transfer cholera to players when drinking from them
-    int choleraChance = 100; // The chance of cholera being transferred to a player when drinking from a well (0-100)
+    int choleraChance = 100; // The chance of cholera being transferred to a player when drinking from a well (0-100) - Testing set to 100%
     string messageCantDrink = "This well don't work, I wonder if it can be fixed? If not il have to find a river, stream or other natural water sources."; // Message displayed when a player tries to drink from the well
     string messageFixed = "It looks like this well is working for now...";  // Message displayed when a player fixes the well
     ref array<ref RepairableWell> RepairableWells = new ref array<ref RepairableWell>; // List of repairable wells
