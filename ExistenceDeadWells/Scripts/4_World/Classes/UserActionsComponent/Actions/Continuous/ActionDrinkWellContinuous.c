@@ -37,24 +37,19 @@ modded class ActionDrinkWellContinuous : ActionContinuousBase
         }
     }
 
-    // When the player stops drinking add the cholera chance to the player
+    // If enableWellTransferCholera is true, then the player has a chance to get cholera when drinking from the well.
     override void OnEndServer(ActionData action_data)
     {
-        super.OnEndServer(action_data);
-
-        if (!action_data || !action_data.m_Player)
-            return;
-
-        int choleraChance;
         Well well = Well.Cast(action_data.m_Target.GetObject());
 
         if (well)
-        {
-            well.TransmitCholeraChance(action_data.m_Player, choleraChance);
-
-            if (Math.RandomInt(0, 100) < choleraChance)
+        {            
+            if (well.GetDeadWellConfig().enableWellTransferCholera && well.GetDeadWellConfig().choleraChance > 0)
             {
-                action_data.m_Player.InsertAgent(eAgents.CHOLERA, 1); // Assuming 'eAgents.CHOLERA' is the correct enum
+                if (Math.RandomIntInclusive(0, 100) <= well.GetDeadWellConfig().choleraChance)
+                {
+                    action_data.m_Player.InsertAgent(eAgents.CHOLERA, 1);
+                }
             }
         }
     }
